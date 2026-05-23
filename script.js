@@ -800,7 +800,8 @@ const modeTipsMap = {
     creative: 'Creative Mode: Brainstorm freely, notes enabled, randomizer active.',
     social: 'Social Mode: Challenges enabled, share progress, celebrate wins.',
     relax: 'Relax Mode: Breathing tips, wellness focus, calming quotes.',
-    stupid: '🤪 Stupid Mode: Have fun, get random jokes and silly activities!'
+    stupid: '🤪 Stupid Mode: Have fun, get random jokes and silly activities!',
+    silly: '🤪 Stupid Mode: Have fun, get random jokes and silly activities!'
 };
 
 modeButtons.forEach(btn => {
@@ -810,7 +811,7 @@ modeButtons.forEach(btn => {
         const mode = btn.dataset.mode;
         const tips = modeTipsMap[mode];
         modeTips.textContent = tips;
-        if (mode === 'silly') {
+        if (mode === 'stupid') {
             displaySillyMode();
         } else {
             modeTips.classList.remove('silly-message');
@@ -821,7 +822,11 @@ modeButtons.forEach(btn => {
 });
 
 function loadMode() {
-    const mode = localStorage.getItem('currentMode') || 'work';
+    let mode = localStorage.getItem('currentMode') || 'work';
+    if (mode === 'silly') {
+        mode = 'stupid';
+        localStorage.setItem('currentMode', mode);
+    }
     const modeBtn = document.querySelector(`[data-mode="${mode}"]`);
     if (modeBtn) modeBtn.click();
 }
@@ -863,8 +868,8 @@ function getRandomSillyActivity() {
 
 function displaySillyMode() {
     modeTips.classList.add('silly-message');
-    modeTips.innerHTML = 'Joke: ' + getRandomSillyJoke() + '<br><br><strong>Try this:</strong> ' + getRandomSillyActivity() + '<br><br><button class="btn silly-btn" onclick="displaySillyMode()">Get Another Joke!</button>';
-    logActivity('Viewing silly jokes and activities');
+    modeTips.innerHTML = 'Stupid Mode Joke: ' + getRandomSillyJoke() + '<br><br><strong>Try this:</strong> ' + getRandomSillyActivity() + '<br><br><button class="btn silly-btn" onclick="displaySillyMode()">Get Another Joke!</button>';
+    logActivity('Viewing Stupid Mode jokes and activities');
 }
 
 // ===== ENERGY TRACKER =====
