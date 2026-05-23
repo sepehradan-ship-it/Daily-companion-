@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Companion - Your Personal Daily App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📅 Daily Companion</h1>
+            <p class="date-display" id="dateDisplay"></p>
+            <div class="header-actions">
+                <button id="openAppBtn" class="btn btn-secondary">Open in New Tab</button>
+                <button id="openGoogleBtn" class="btn btn-secondary">Search on Google</button>
+                <button id="openDuckBtn" class="btn btn-secondary">Search on DuckDuckGo</button>
+                <button id="toggleThemeBtn" class="btn btn-secondary">Dark Mode</button>
+            </div>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="tasks">📝 Tasks</button>
+            <button class="tab-btn" data-tab="journal">📔 Journal</button>
+            <button class="tab-btn" data-tab="planner">🗓️ Planner</button>
+            <button class="tab-btn" data-tab="randomizer">🎲 Randomizer</button>
+            <button class="tab-btn" data-tab="reminders">🔔 Reminders</button>
+            <button class="tab-btn" data-tab="habits">📈 Habits</button>
+            <button class="tab-btn" data-tab="goals">🎯 Goals</button>
+            <button class="tab-btn" data-tab="focus">⏱️ Focus</button>
+            <button class="tab-btn" data-tab="wellness">💚 Wellness</button>
+            <button class="tab-btn" data-tab="modes">⚙️ Modes</button>
+            <button class="tab-btn" data-tab="energy">⚡ Energy</button>
+            <button class="tab-btn" data-tab="notes">📌 Notes</button>
+            <button class="tab-btn" data-tab="achievements">🏆 Achievements</button>
+            <button class="tab-btn" data-tab="challenges">🎯 Challenges</button>
+            <button class="tab-btn" data-tab="activitylog">📊 Activity</button>
+            <button class="tab-btn" data-tab="data">🛠️ Data</button>
+        </nav>
+
+        <!-- TASKS TAB -->
+        <section class="tab-content active" id="tasks">
+            <div class="section-header">
+                <h2>Daily Tasks</h2>
+            </div>
+            <div class="input-group">
+                <input type="text" id="taskInput" placeholder="Add a new task..." class="input-field">
+                <label class="checkbox-label"><input type="checkbox" id="taskRecurring"> Recurring</label>
+                <button id="addTaskBtn" class="btn btn-primary">Add Task</button>
+            </div>
+            <ul id="taskList" class="task-list scrollable"></ul>
+            <div class="stats">
+                <p>Progress: <span id="taskProgress">0%</span></p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- JOURNAL TAB -->
+        <section class="tab-content" id="journal">
+            <div class="section-header">
+                <h2>Daily Journal</h2>
+                <button id="clearJournalBtn" class="btn btn-secondary">Clear Entry</button>
+            </div>
+            <textarea id="journalInput" placeholder="Write your thoughts, feelings, and reflections for today..." class="journal-textarea"></textarea>
+            <button id="saveJournalBtn" class="btn btn-primary">Save Entry</button>
+            <div id="journalSaved" class="notification"></div>
+        </section>
+
+        <!-- PLANNER TAB -->
+        <section class="tab-content" id="planner">
+            <div class="section-header">
+                <h2>Daily Schedule</h2>
+            </div>
+            <div class="planner-container">
+                <div class="input-group-planner">
+                    <input type="time" id="plannerTime" class="input-field">
+                    <input type="text" id="plannerEvent" placeholder="Event description..." class="input-field">
+                    <button id="addEventBtn" class="btn btn-primary">Add Event</button>
+                </div>
+                <ul id="scheduleList" class="schedule-list"></ul>
+            </div>
+        </section>
+
+        <!-- RANDOMIZER TAB -->
+        <section class="tab-content" id="randomizer">
+            <div class="section-header">
+                <h2>Daily Randomizer</h2>
+            </div>
+            <div class="randomizer-container">
+                <p class="randomizer-description">Need a fresh idea or want to pick a task at random? Use the buttons below.</p>
+                <div class="randomizer-buttons">
+                    <button id="randomIdeaBtn" class="btn btn-primary">Random Idea</button>
+                    <button id="randomTaskBtn" class="btn btn-secondary">Random Task</button>
+                    <button id="randomScheduleBtn" class="btn btn-secondary">Random Plan Item</button>
+                    <button id="randomReminderBtn" class="btn btn-secondary">Random Reminder</button>
+                    <button id="randomDailyBoosterBtn" class="btn btn-primary">Daily Booster</button>
+                </div>
+                <div class="randomizer-helper">
+                    <p>Daily Booster chooses a helpful action from tasks, ideas, planner events, or reminders.</p>
+                </div>
+                <div id="randomResult" class="randomizer-result">Your random suggestion will appear here.</div>
+            </div>
+        </section>
+
+        <!-- REMINDERS TAB -->
+        <section class="tab-content" id="reminders">
+            <div class="section-header">
+                <h2>Daily Reminders</h2>
+            </div>
+            <div class="input-group-planner">
+                <input type="time" id="reminderTime" class="input-field">
+                <input type="text" id="reminderText" placeholder="What to remind about..." class="input-field">
+                <button id="addReminderBtn" class="btn btn-primary">Add Reminder</button>
+            </div>
+            <ul id="reminderList" class="reminder-list"></ul>
+        </section>
+
+        <!-- HABITS TAB -->
+        <section class="tab-content" id="habits">
+            <div class="section-header">
+                <h2>Habit Tracker</h2>
+            </div>
+            <div class="input-group">
+                <input type="text" id="habitInput" placeholder="Add a new habit..." class="input-field">
+                <button id="addHabitBtn" class="btn btn-primary">Add Habit</button>
+            </div>
+            <ul id="habitList" class="habit-list scrollable"></ul>
+            <div class="summary-box" id="weeklySummary"></div>
+        </section>
+
+        <!-- GOALS TAB -->
+        <section class="tab-content" id="goals">
+            <div class="section-header">
+                <h2>Goal Tracker</h2>
+            </div>
+            <div class="input-group">
+                <input type="text" id="goalInput" placeholder="Add a new goal..." class="input-field">
+                <button id="addGoalBtn" class="btn btn-primary">Add Goal</button>
+            </div>
+            <ul id="goalList" class="goal-list scrollable"></ul>
+        </section>
+
+        <!-- FOCUS TAB -->
+        <section class="tab-content" id="focus">
+            <div class="section-header">
+                <h2>Pomodoro Focus</h2>
+            </div>
+            <div class="pomodoro-panel">
+                <div class="timer-display" id="pomodoroTimer">25:00</div>
+                <div class="timer-controls">
+                    <button id="startPomodoroBtn" class="btn btn-primary">Start</button>
+                    <button id="pausePomodoroBtn" class="btn btn-secondary">Pause</button>
+                    <button id="resetPomodoroBtn" class="btn btn-secondary">Reset</button>
+                </div>
+                <div class="timer-options">
+                    <label>Work: <input type="number" id="workMinutes" value="25" min="1" max="60"></label>
+                    <label>Break: <input type="number" id="breakMinutes" value="5" min="1" max="30"></label>
+                </div>
+                <p class="timer-note">Use focus sessions to stay productive and take intentional breaks.</p>
+            </div>
+        </section>
+
+        <!-- WELLNESS TAB -->
+        <section class="tab-content" id="wellness">
+            <div class="section-header">
+                <h2>Wellness Zone</h2>
+            </div>
+            <div class="wellness-row">
+                <div class="wellness-block">
+                    <h3>Daily Mood</h3>
+                    <div class="mood-buttons">
+                        <button class="btn mood-btn" data-mood="Happy">😊</button>
+                        <button class="btn mood-btn" data-mood="Calm">😌</button>
+                        <button class="btn mood-btn" data-mood="Focused">🧠</button>
+                        <button class="btn mood-btn" data-mood="Tired">😴</button>
+                        <button class="btn mood-btn" data-mood="Excited">🤩</button>
+                    </div>
+                    <p id="moodResult" class="mood-result">Select how you feel today.</p>
+                </div>
+                <div class="wellness-block">
+                    <h3>Gratitude</h3>
+                    <textarea id="gratitudeInput" class="journal-textarea" placeholder="Write one thing you are grateful for..."></textarea>
+                    <button id="saveGratitudeBtn" class="btn btn-primary">Save Gratitude</button>
+                </div>
+            </div>
+            <div class="quote-box" id="dailyQuote"></div>
+            <button id="breathingBtn" class="btn btn-secondary">Quick Breathing Reminder</button>
+            <p id="breathingTip" class="small-text"></p>
+        </section>
+
+        <!-- MODES TAB -->
+        <section class="tab-content" id="modes">
+            <div class="section-header">
+                <h2>Daily Modes</h2>
+            </div>
+            <p class="mode-description">Select a mode to optimize your app for today's activities:</p>
+            <div class="modes-grid">
+                <button class="mode-btn" data-mode="work">💼 Work Mode</button>
+                <button class="mode-btn" data-mode="study">📚 Study Mode</button>
+                <button class="mode-btn" data-mode="wellness">🧘 Wellness Mode</button>
+                <button class="mode-btn" data-mode="creative">🎨 Creative Mode</button>
+                <button class="mode-btn" data-mode="social">👥 Social Mode</button>
+                <button class="mode-btn" data-mode="relax">😴 Relax Mode</button>
+                <button class="mode-btn" data-mode="stupid">🤪 Stupid Mode</button>
+            </div>
+            <div class="mode-tips" id="modeTips"></div>
+        </section>
+
+        <!-- ENERGY TAB -->
+        <section class="tab-content" id="energy">
+            <div class="section-header">
+                <h2>Energy Tracker</h2>
+            </div>
+            <p>How is your energy level right now?</p>
+            <div class="energy-controls">
+                <input type="range" id="energySlider" min="1" max="10" value="5" class="energy-slider">
+                <span id="energyValue" class="energy-value">5/10</span>
+                <button id="saveEnergyBtn" class="btn btn-primary">Save Energy Level</button>
+            </div>
+            <div class="energy-chart scrollable" id="energyChart"></div>
+            <div id="energyTips" class="summary-box"></div>
+        </section>
+
+        <!-- NOTES TAB -->
+        <section class="tab-content" id="notes">
+            <div class="section-header">
+                <h2>Quick Notes</h2>
+            </div>
+            <textarea id="quickNotes" placeholder="Capture your thoughts quickly..." class="journal-textarea"></textarea>
+            <button id="saveNotesBtn" class="btn btn-primary">Save Notes</button>
+            <button id="clearNotesBtn" class="btn btn-secondary">Clear</button>
+            <div id="notesSaved" class="notification"></div>
+        </section>
+
+        <!-- ACHIEVEMENTS TAB -->
+        <section class="tab-content" id="achievements">
+            <div class="section-header">
+                <h2>Achievements & Badges</h2>
+            </div>
+            <div class="badges-grid" id="badgesContainer"></div>
+            <div class="achievement-stats" id="achievementStats"></div>
+        </section>
+
+        <!-- CHALLENGES TAB -->
+        <section class="tab-content" id="challenges">
+            <div class="section-header">
+                <h2>Daily Challenges</h2>
+            </div>
+            <div class="input-group">
+                <input type="text" id="challengeInput" placeholder="Add a challenge..." class="input-field">
+                <button id="addChallengeBtn" class="btn btn-primary">Add Challenge</button>
+            </div>
+            <ul id="challengeList" class="challenge-list scrollable"></ul>
+        </section>
+
+        <!-- ACTIVITY LOG TAB -->
+        <section class="tab-content" id="activitylog">
+            <div class="section-header">
+                <h2>Activity Log</h2>
+            </div>
+            <div class="log-controls">
+                <button id="clearLogBtn" class="btn btn-secondary">Clear Log</button>
+                <label>Filter: <input type="text" id="logFilter" placeholder="Search activities..." class="input-field"></label>
+            </div>
+            <div class="activity-log scrollable" id="activityLog"></div>
+        </section>
+
+        <!-- DATA TAB -->
+        <section class="tab-content" id="data">
+            <div class="section-header">
+                <h2>Data & Tools</h2>
+            </div>
+            <div class="input-group-planner">
+                <button id="exportDataBtn" class="btn btn-primary">Export Data</button>
+                <button id="importDataBtn" class="btn btn-secondary">Import Data</button>
+                <input type="file" id="importFileInput" accept="application/json" hidden>
+            </div>
+            <div class="search-panel">
+                <label>Search tasks</label>
+                <input type="text" id="taskSearch" placeholder="Search current tasks..." class="input-field">
+                <label>Search journal history</label>
+                <input type="text" id="journalSearch" placeholder="Search saved journal entries..." class="input-field">
+                <div id="journalSearchResults" class="search-results"></div>
+            </div>
+            <button id="smartTaskBtn" class="btn btn-primary">What should I do next?</button>
+            <div id="smartTaskResult" class="randomizer-result">Use the smart task picker to get a recommendation.</div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+/* SCROLLABLE CONTAINERS */
+.scrollable {
+    overflow-y: auto;
+    max-height: 300px;
+    border: 1px solid #e5e9f2;
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.scrollable::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollable::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 10px;
+}
+
+.scrollable::-webkit-scrollbar-thumb:hover {
+    background: #5568d3;
+}
+
+/* Firefox Scrollbar */
+.scrollable {
+    scrollbar-width: thin;
+    scrollbar-color: #667eea #f1f1f1;
+}
+
+.dark-mode .scrollable {
+    background: #2f3450;
+    border-color: #3b4254;
+    scrollbar-color: #5c74ff #2f3450;
+}
+
+.dark-mode .scrollable::-webkit-scrollbar-track {
+    background: #1f2430;
+}
+
+.dark-mode .scrollable::-webkit-scrollbar-thumb {
+    background: #5c74ff;
+}
+
+/* SILLY MODE */
+.silly-message {
+    background: linear-gradient(135deg, #ffd89b 0%, #ff6b9d 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 600;
+    margin: 10px 0;
+    font-size: 1.1em;
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.silly-btn {
+    background: #ff6b9d;
+    color: white;
+    margin: 5px;
+}
+
+.silly-btn:hover {
+    background: #ff5291;
+    transform: rotate(5deg) scale(1.1);
+}
