@@ -49,11 +49,37 @@ header h1 {
     display: flex;
     border-bottom: 2px solid #f0f0f0;
     background: #fafafa;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+}
+
+.tabs::-webkit-scrollbar {
+    height: 6px;
+}
+
+.tabs::-webkit-scrollbar-track {
+    background: #f0f0f0;
+}
+
+.tabs::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+}
+
+.tabs::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+.tabs {
+    scrollbar-width: thin;
+    scrollbar-color: #ccc #f0f0f0;
 }
 
 .tab-btn {
-    flex: 1;
-    padding: 15px 10px;
+    flex-shrink: 0;
+    padding: 15px 15px;
     border: none;
     background: none;
     cursor: pointer;
